@@ -1,0 +1,265 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Sprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/DirtPathTileMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/DirtCliffTileMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/veyard.png" type="Texture" id=7]
+[ext_resource path="res://MainRoom.gd" type="Script" id=8]
+[ext_resource path="res://World/Camera2D.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Street.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=11]
+
+[sub_resource type="TileSet" id=1]
+0/name = "veyard.png 0"
+0/texture = ExtResource( 7 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 48, 48 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 511, Vector2( 0, 1 ), 432, Vector2( 0, 2 ), 473, Vector2( 1, 0 ), 54, Vector2( 1, 1 ), 464, Vector2( 1, 2 ), 23, Vector2( 2, 0 ), 23, Vector2( 2, 1 ), 95, Vector2( 2, 2 ), 208 ]
+0/autotile/icon_coordinate = Vector2( 1, 1 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="Animation" id=2]
+resource_name = "RollDown"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 55, 56, 57, 58, 59 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "RollLeft"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 50, 51, 52, 53, 54 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "RollRight"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "RollUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 45, 46, 47, 48, 49 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_animation_finished"
+} ]
+}
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[sub_resource type="RectangleShape2D" id=7]
+
+[node name="World" type="Node2D"]
+
+[node name="Sprite" parent="." instance=ExtResource( 3 )]
+position = Vector2( 319, 180 )
+
+[node name="Street" parent="." instance=ExtResource( 10 )]
+tile_data = PoolIntArray( -65524, 0, 5, -65523, 0, 6, -65522, 0, 7, 12, 0, 65541, 13, 0, 1, 14, 0, 65543, 65547, 0, 5, 65548, 0, 0, 65549, 0, 2, 65550, 0, 65538, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 196620, 0, 0 )
+
+[node name="DirtPathTileMap" parent="." instance=ExtResource( 4 )]
+tile_data = PoolIntArray( 65547, 0, 0, 65548, 0, 5, 65549, 0, 196609, 65550, 0, 196610, 131082, 0, 0, 131083, 0, 131078, 131084, 0, 65538, 196617, 0, 0, 196618, 0, 131078, 196619, 0, 65537, 196620, 0, 65538, 262151, 0, 0, 262152, 0, 1, 262153, 0, 65545, 262154, 0, 131073, 262155, 0, 131073, 262156, 0, 131074, 327686, 0, 0, 327687, 0, 65545, 327688, 0, 131073, 327689, 0, 131074, 393221, 0, 0, 393222, 0, 131078, 393223, 0, 65538, 524287, 0, 0, 458752, 0, 1, 458753, 0, 1, 458754, 0, 1, 458755, 0, 1, 458756, 0, 1, 458757, 0, 65545, 458758, 0, 131073, 458759, 0, 131074, 589823, 0, 131072, 524288, 0, 131073, 524289, 0, 131073, 524290, 0, 131073, 524291, 0, 131073, 524292, 0, 131073, 524293, 0, 131074 )
+
+[node name="DirtCliffTileMap" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -131062, 0, 3, -1, 0, 0, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 5, -65532, 0, 196609, -65531, 0, 196609, -65530, 0, 196609, -65529, 0, 196609, -65528, 0, 6, -65527, 0, 1, -65526, 0, 131079, 65535, 0, 65536, 0, 0, 65537, 1, 0, 65537, 2, 0, 65541, 3, 0, 131074, 8, 0, 65536, 9, 0, 65537, 10, 0, 131077, 11, 0, 2, 131071, 0, 65540, 65536, 0, 131073, 65537, 0, 65542, 65538, 0, 65538, 65543, 0, 0, 65544, 0, 131078, 65545, 0, 65537, 65546, 0, 65537, 65547, 0, 131077, 65548, 0, 2, 196607, 0, 65539, 131073, 0, 131072, 131074, 0, 131074, 131079, 0, 131072, 131080, 0, 131073, 131081, 0, 65542, 131082, 0, 65537, 131083, 0, 65537, 131084, 0, 131077, 131085, 0, 2, 262143, 0, 65539, 196612, 0, 3, 196617, 0, 65536, 196618, 0, 65537, 196619, 0, 65537, 196620, 0, 65541, 196621, 0, 131074, 327679, 0, 65539, 262147, 0, 0, 262148, 0, 131079, 262151, 0, 0, 262152, 0, 1, 262153, 0, 131078, 262154, 0, 65537, 262155, 0, 65537, 262156, 0, 65538, 393215, 0, 65539, 327683, 0, 65536, 327684, 0, 131077, 327685, 0, 1, 327686, 0, 1, 327687, 0, 131078, 327688, 0, 65537, 327689, 0, 65537, 327690, 0, 65541, 327691, 0, 131073, 327692, 0, 131074, 458751, 0, 196612, 393216, 0, 6, 393217, 0, 1, 393218, 0, 1, 393219, 0, 131078, 393220, 0, 65537, 393221, 0, 65537, 393222, 0, 65537, 393223, 0, 65537, 393224, 0, 65537, 393225, 0, 65537, 393226, 0, 65538, 458752, 0, 131072, 458753, 0, 65542, 458754, 0, 65537, 458755, 0, 65537, 458756, 0, 65537, 458757, 0, 65537, 458758, 0, 65537, 458759, 0, 65537, 458760, 0, 65541, 458761, 0, 131073, 458762, 0, 131074, 524289, 0, 131072, 524290, 0, 131073, 524291, 0, 65542, 524292, 0, 65541, 524293, 0, 131073, 524294, 0, 131073, 524295, 0, 131073, 524296, 0, 131074, 589827, 0, 131072, 589828, 0, 131074 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 16, 128 )
+
+[node name="CollisionShape2D" parent="YSort/Player" index="1"]
+one_way_collision_margin = 0.0
+
+[node name="AnimationPlayer" parent="YSort/Player" index="2"]
+anims/RollDown = SubResource( 2 )
+anims/RollLeft = SubResource( 3 )
+anims/RollRight = SubResource( 4 )
+anims/RollUp = SubResource( 5 )
+
+[node name="AnimationTree" parent="YSort/Player" index="3"]
+parameters/playback = SubResource( 6 )
+parameters/Roll/blend_position = Vector2( 0, 0 )
+
+[node name="YSort" type="YSort" parent="YSort/Player"]
+
+[node name="Camera2D" parent="YSort/Player" instance=ExtResource( 9 )]
+position = Vector2( 0, -2 )
+
+[node name="Bushes" type="YSort" parent="YSort"]
+
+[node name="Bush" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 152, 16 )
+
+[node name="Bush2" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 40, 168 )
+
+[node name="Bush3" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 264, 112 )
+
+[node name="Bush4" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 104, 240 )
+
+[node name="Bush5" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 336, 40 )
+
+[node name="Bush6" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 368, 112 )
+
+[node name="Bush7" parent="YSort/Bushes" instance=ExtResource( 2 )]
+position = Vector2( 68, 62 )
+
+[node name="Bat" type="YSort" parent="YSort"]
+position = Vector2( 16, 128 )
+
+[node name="Bat" parent="YSort/Bat" instance=ExtResource( 11 )]
+position = Vector2( 66, -4 )
+
+[node name="Grass" type="YSort" parent="YSort"]
+
+[node name="Grass" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 112, 48 )
+
+[node name="Grass4" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 11, 174 )
+
+[node name="Grass5" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 198, 113 )
+
+[node name="Grass6" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 196, 92 )
+
+[node name="Grass7" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 178, 106 )
+
+[node name="Grass2" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 59, 163 )
+
+[node name="MainRoom" type="Area2D" parent="."]
+position = Vector2( 216, 16 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainRoom"]
+position = Vector2( 0, -13 )
+shape = SubResource( 7 )
+
+[editable path="YSort/Player"]
+
+[editable path="YSort/Player/HitboxPivot/SwordHitbox"]
